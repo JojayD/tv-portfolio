@@ -1,103 +1,108 @@
-import Image from "next/image";
+"use client";
+import { motion } from "framer-motion";
+import TvScreen from "@/components/TvScreen";
+import { useChannel } from "@/context/ChannelContext";
+import Link from "next/link";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+	const { currentChannel } = useChannel();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+	return (
+		<TvScreen
+			isActive={true}
+			channelNumber={currentChannel}
+		>
+			{/* Bouncing circle TV effect */}
+			<div className='absolute inset-0 overflow-hidden'>
+				<div
+					className='absolute w-16 h-16 rounded-full bg-white/20 blur-md'
+					style={{
+						animation: "bouncingCircle 8s linear infinite",
+					}}
+				/>
+			</div>
+			<style jsx>{`
+				@keyframes bouncingCircle {
+					0% {
+						top: 10%;
+						left: 20%;
+					}
+					25% {
+						top: 75%;
+						left: 80%;
+					}
+					50% {
+						top: 30%;
+						left: 65%;
+					}
+					75% {
+						top: 80%;
+						left: 15%;
+					}
+					100% {
+						top: 10%;
+						left: 20%;
+					}
+				}
+			`}</style>
+
+			<div className='min-h-[50vh] flex flex-col items-center justify-center text-center p-4 text-white relative z-10'>
+				<motion.h1
+					className='text-4xl md:text-5xl font-bold mb-6 font-mono'
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.2 }}
+				>
+					The <span className='text-amber-400'>Joseph David</span> show
+				</motion.h1>
+
+				<motion.p
+					className='text-lg mb-8 max-w-xl'
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
+					transition={{ delay: 0.4 }}
+				>
+					Use the remote control to navigate through different channels and explore
+					my work.
+				</motion.p>
+
+				<motion.div
+					className='grid grid-cols-2 md:grid-cols-3 gap-6 mt-8 w-full max-w-3xl items-center justify-items-center'
+					initial={{ opacity: 0, y: 20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ delay: 0.6 }}
+				>
+					{/* Channel buttons */}
+					{[
+						{ name: "About Me", path: "/about", color: "bg-blue-500", num: 2 },
+						{ name: "Projects", path: "/projects", color: "bg-green-500", num: 3 },
+						{ name: "Contact", path: "/contact", color: "bg-purple-500", num: 4 },
+					].map((item) => (
+						<Link
+							href={item.path}
+							key={item.path}
+						>
+							<motion.div
+								className={`${item.color} rounded-lg p-4 text-center cursor-pointer hover:scale-105 transition-transform`}
+								whileHover={{ scale: 1.05 }}
+								whileTap={{ scale: 0.95 }}
+							>
+								<div className='text-xs mb-1 font-mono'>CHANNEL {item.num}</div>
+								<div className='font-medium'>{item.name}</div>
+							</motion.div>
+						</Link>
+					))}
+				</motion.div>
+
+				<motion.div
+					className='mt-16 text-xs opacity-50 font-mono'
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 0.5 }}
+					transition={{ delay: 1 }}
+				>
+					Please adjust your TV set for optimal viewing experience
+				</motion.div>
+			</div>
+		</TvScreen>
+	);
 }
