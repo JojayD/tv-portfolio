@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import TvScreen from "@/components/TvScreen";
 import { useChannel } from "@/context/ChannelContext";
 import { useState } from "react";
+import Link from "next/link";
 
 // Sample project data
 const projects = [
@@ -10,21 +11,23 @@ const projects = [
 		id: 1,
 		title: "Code Canvas",
 		description:
-			"Code canvas is a platoform where you can practice your interview skills with mock interviews.",
-		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase"],
+			"Code canvas is a platform where you can practice your interview skills with mock interviews.",
+		technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "AWS"],
 		imageUrl: "/code-canvas.png",
-		category: "Full Stack",
+		category: "Full Stack Development",
 		gitHubUrl: "https://github.com/JojayD/codecanvas",
+		liveUrl: "https://www.codecanvas.digital",
 	},
 	{
 		id: 2,
 		title: "Shark seek",
 		description:
 			"Combine RMP and CSULB course catalog and you get Shark Seek. You now don't have to go back and forth between RMP and the CSULB course catalog to find the perfect class.",
-		technologies: ["Next.js", "Node.js", "MongoDB"],
+		technologies: ["Next.js", "Typescript", "Python", "BeautifulSoup"],
 		imageUrl: "/shark-seek.png", // Make sure to add this image in your public folder
-		category: "",
+		category: "Full Stack Development",
 		gitHubUrl: "https://github.com/JojayD/codecanvas",
+		liveUrl: "https://shark-seek.vercel.app/",
 	},
 	{
 		id: 3,
@@ -187,7 +190,16 @@ export default function ProjectsPage() {
 
 										<div className='flex gap-4'>
 											<button className='bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg'>
-												View Live
+												{project.liveUrl ? (
+													<Link
+														href={project.liveUrl}
+														target='_blank'
+													>
+														View Live
+													</Link>
+												) : (
+													<span>View Live</span>
+												)}
 											</button>
 											<button className='bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg'>
 												<a
