@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import TvScreen from "@/components/TvScreen";
 import { useChannel } from "@/context/ChannelContext";
-import { useState, FormEvent } from "react";
+
 const socials = {
 	Github: "https://github.com/JojayD",
 	Linkedin: "https://www.linkedin.com/in/joseph-d-89b5801b0/",
@@ -10,41 +10,6 @@ const socials = {
 
 export default function ContactPage() {
 	const { currentChannel } = useChannel();
-	const [formState, setFormState] = useState({
-		name: "",
-		email: "",
-		message: "",
-	});
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [isSubmitted, setIsSubmitted] = useState(false);
-	const [isError, setIsError] = useState(false);
-
-	const handleSubmit = (e: FormEvent) => {
-		e.preventDefault();
-		setIsSubmitting(true);
-
-		// Simulate form submission
-		setTimeout(() => {
-			setIsSubmitting(false);
-			setIsSubmitted(true);
-			// Reset form after submission
-			setFormState({
-				name: "",
-				email: "",
-				message: "",
-			});
-		}, 1500);
-	};
-
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		const { name, value } = e.target;
-		setFormState((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
 
 	return (
 		<TvScreen
@@ -74,28 +39,6 @@ export default function ContactPage() {
 							</p>
 
 							<div className='bg-gray-800 p-6 rounded-lg space-y-4'>
-								<div className='flex items-center space-x-4'>
-									<div className='w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center'>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											width='20'
-											height='20'
-											viewBox='0 0 24 24'
-											fill='none'
-											stroke='currentColor'
-											strokeWidth='2'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-										>
-											<path d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'></path>
-										</svg>
-									</div>
-									<div>
-										<div className='text-sm text-gray-400'>Phone</div>
-										<div className='font-mono'>408-477-0748</div>
-									</div>
-								</div>
-
 								<div className='flex items-center space-x-4'>
 									<div className='w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center'>
 										<svg
@@ -148,111 +91,37 @@ export default function ContactPage() {
 							initial={{ opacity: 0, x: 20 }}
 							animate={{ opacity: 1, x: 0 }}
 							transition={{ delay: 0.4 }}
+							className='flex flex-col items-center justify-center'
 						>
-							{isSubmitted ? (
-								<motion.div
-									initial={{ opacity: 0, scale: 0.8 }}
-									animate={{ opacity: 1, scale: 1 }}
-									className='bg-gray-800 p-8 rounded-lg text-center'
-								>
-									<div className='w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4'>
-										<svg
-											xmlns='http://www.w3.org/2000/svg'
-											width='32'
-											height='32'
-											viewBox='0 0 24 24'
-											fill='none'
-											stroke='currentColor'
-											strokeWidth='2'
-											strokeLinecap='round'
-											strokeLinejoin='round'
-										>
-											<polyline points='20 6 9 17 4 12'></polyline>
-										</svg>
-									</div>
-									<h3 className='text-xl font-bold mb-2'>Message Sent!</h3>
-									<p className='text-gray-300 mb-4'>
-										Thank you for reaching out. I'll get back to you as soon as possible.
-									</p>
-									<button
-										className='bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-md'
-										onClick={() => setIsSubmitted(false)}
+							<div className='bg-gray-800 p-8 rounded-lg text-center w-full'>
+								<div className='w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-4'>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										width='32'
+										height='32'
+										viewBox='0 0 24 24'
+										fill='none'
+										stroke='currentColor'
+										strokeWidth='2'
+										strokeLinecap='round'
+										strokeLinejoin='round'
 									>
-										Send Another Message
-									</button>
-								</motion.div>
-							) : (
-								<form
-									onSubmit={handleSubmit}
-									className='bg-gray-800 p-6 rounded-lg'
+										<path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'></path>
+										<polyline points='22,6 12,13 2,6'></polyline>
+									</svg>
+								</div>
+								<h3 className='text-xl font-bold mb-4'>Send Me an Email</h3>
+								<p className='text-gray-300 mb-6'>
+									Click the button below to open your email client and send me a message
+									directly.
+								</p>
+								<a
+									href='mailto:info@josephsanchezdavid.com?subject=Portfolio%20Contact'
+									className='bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-md inline-block font-medium transition-colors'
 								>
-									<div className='mb-4'>
-										<label
-											htmlFor='name'
-											className='block text-gray-300 mb-1'
-										>
-											Name
-										</label>
-										<input
-											type='text'
-											id='name'
-											name='name'
-											value={formState.name}
-											onChange={handleChange}
-											className='w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500'
-											required
-										/>
-									</div>
-
-									<div className='mb-4'>
-										<label
-											htmlFor='email'
-											className='block text-gray-300 mb-1'
-										>
-											Email
-										</label>
-										<input
-											type='email'
-											id='email'
-											name='email'
-											value={formState.email}
-											onChange={handleChange}
-											className='w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500'
-											required
-										/>
-									</div>
-
-									<div className='mb-6'>
-										<label
-											htmlFor='message'
-											className='block text-gray-300 mb-1'
-										>
-											Message
-										</label>
-										<textarea
-											id='message'
-											name='message'
-											value={formState.message}
-											onChange={handleChange}
-											rows={5}
-											className='w-full bg-gray-700 border border-gray-600 rounded-md px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-purple-500'
-											required
-										></textarea>
-									</div>
-
-									<button
-										type='submit'
-										disabled={isSubmitting}
-										className={`w-full px-4 py-3 rounded-md font-medium ${
-											isSubmitting
-												? "bg-gray-600 cursor-not-allowed"
-												: "bg-purple-600 hover:bg-purple-700"
-										}`}
-									>
-										{isSubmitting ? "Sending..." : "Send Message"}
-									</button>
-								</form>
-							)}
+									Open Mail Client
+								</a>
+							</div>
 						</motion.div>
 					</div>
 
