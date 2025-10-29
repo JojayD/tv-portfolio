@@ -67,16 +67,17 @@ export default function Home() {
 				</motion.p>
 
 				<motion.div
-					className='grid grid-cols-2 md:grid-cols-3 gap-6 mt-8 w-full max-w-3xl items-center justify-items-center'
+					className='grid grid-cols-2 md:grid-cols-4 gap-6 mt-8 w-full max-w-3xl items-center justify-items-center'
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.6 }}
 				>
 					{/* Channel buttons */}
 					{[
-						{ name: "About Me", path: "/about", color: "bg-blue-500", num: 2 },
-						{ name: "Projects", path: "/projects", color: "bg-green-500", num: 3 },
-						{ name: "Contact", path: "/contact", color: "bg-purple-500", num: 4 },
+						{ name: "About Me", path: "/about", color: "bg-blue-500", num:  2},
+						{name : "Experience", path: "/experience", color: "bg-red-500", num: 3},
+						{ name: "Projects", path: "/projects", color: "bg-green-500", num: 4 },
+						{ name: "Contact", path: "/contact", color: "bg-purple-500", num: 5 },
 					].map((item) => (
 						<Link
 							href={item.path}
