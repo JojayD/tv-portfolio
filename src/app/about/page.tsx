@@ -74,8 +74,9 @@ export default function AboutPage() {
 								<div className='grid grid-cols-2 gap-4'>
 									<div className='bg-gray-700 p-3 rounded-md'>
 										<h3 className='text-sm font-bold mb-1'>Experience</h3>
-										<p className='text-gray-300 text-sm'>CSULB Undergraduate Researcher</p>
-										<p className='text-gray-400 text-xs'>2023-2025</p>
+										<p className='text-gray-300 text-sm'>SWE Intern</p>
+										<p className='text-gray-300 text-sm'>Everything Parlays</p>
+										<p className='text-gray-400 text-xs'>May 2025 - Present</p>
 									</div>
 
 									<div className='bg-gray-700 p-3 rounded-md'>
